@@ -13,6 +13,7 @@ load_packages <- function(){
   library(gridExtra)
   library(PCAtools)
   library(tidyverse)
+  library(pheatmap)
 }
 
 paths_fun <- function(deg_list){
