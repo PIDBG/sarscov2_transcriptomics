@@ -16,38 +16,7 @@ load_packages <- function(){
   library(pheatmap)
 }
 
-paths_fun <- function(deg_list){
-  up_genes <- deg_list[deg_list$log2FoldChange > 0 & deg_list$padj < 0.05,]
-  down_genes <- deg_list[deg_list$log2FoldChange < 0 & deg_list$padj < 0.05,]
-  # identify pathways from genes up regulated
-  paths_up <- gost(up_genes$gene,
-                   organism = 'hsapiens',
-                   correction_method = 'fdr',
-                   ordered_query = T,
-                   source = "GO:BP")
-  # identify pathways from genes down regulated
-  paths_down <- gost(down_genes$gene,
-                     organism = 'hsapiens',
-                     correction_method = 'fdr',
-                     ordered_query = T,
-                     source = "GO:BP")
-  # filter so only significant 
-  paths_up <- paths_up$result[paths_up$result$p_value < 0.05,]
-  paths_down <- paths_down$result[paths_down$result$p_value < 0.05,]
-  return(list(paths_up = paths_up,
-              paths_down = paths_down))
-}
-
-read_revigo <- function(file_name){
-  f <- read.csv(file = file_name, header = T)
-  f <- f[f$Eliminated==' False',]
-  f <- f[order(f$Value),]
-  # add on the intersection size from the original results file 
-  #original_pathways <- original_pathways[match(f$term_ID, original_pathways$term_id),]
-  #f$intersection <- original_pathways$intersection_size/original_pathways$term_size
-  return(f)
-}
-
+# function for boxplot plotting the cell proportions by severity
 s_cell <- function(df, cell_name, cell_name_col){
   p_df <- data.frame(Severity = df$Severity.Sample, cell = df[,cell_name_col])
   m <- max(p_df$cell)+0.05
@@ -72,6 +41,7 @@ s_cell <- function(df, cell_name, cell_name_col){
   return(p)
 }
 
+# function for plotting PCA
 pca_plot_fun <- function(pc1, pc2, color, num1, num2, col_vec, importance, col_name){
   df <- data.frame(dim_1 = pc1,
                    dim_2 = pc2,
@@ -113,7 +83,7 @@ treatment_plot <- function(df, cell_name, cell_name_col, treatment, treatment_co
   return(p)
 }
 
-
+# function for plotting the crossplots i.e. LFC values plotted against each other for different comparisons
 cross_plot <- function(df1, df2, lims, title){
   df <- data.frame()
   df <- data.frame(ID = rownames(df1), 
@@ -161,6 +131,7 @@ cross_plot <- function(df1, df2, lims, title){
   return(df)
 }
 
+# processing DESeq results, adding gene names, ordering by adjusted p-value
 deseq.results <- function(res, gene.names, outfile){
   res <- res[order(res$padj),]
   res.df <- data.frame(res)
