@@ -7,6 +7,7 @@ load_packages()
 
 ########################################################################
 # Read in data
+# ** change filenames if downloading from ArrayExpress **
 ########################################################################
 
 # read in metadata and counts
@@ -17,6 +18,7 @@ counts <- counts[,match(meta.interest$ID, colnames(counts))]
 
 ########################################################################
 # Plot levels of cells estimated from CIBERSORT
+# need to estimate these prior to running this code
 ########################################################################
 
 cell_types <- meta.interest[,c(8, 12, 14, 16:19)]
