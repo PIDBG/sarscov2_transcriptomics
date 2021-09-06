@@ -7,7 +7,6 @@ load_packages()
 
 ########################################################################
 # Read in data
-# ** change filenames if downloading from ArrayExpress **
 ########################################################################
 
 # read in metadata and counts
@@ -18,7 +17,6 @@ counts <- counts[,match(meta.interest$ID, colnames(counts))]
 
 ########################################################################
 # Plot levels of cells estimated from CIBERSORT
-# need to estimate these prior to running this code
 ########################################################################
 
 cell_types <- meta.interest[,c(8, 12, 14, 16:19)]
@@ -674,3 +672,173 @@ t_p <- pheatmap(t(log2(exp_treatment[,2:ncol(exp_treatment)]+1)),
 
 grid::grid.newpage()
 grid::grid.draw(t_p$gtable)
+
+# Boxplots of the 10 top genes highlighted in the heatmap 
+CD177 <- ggplot(exp_treatment, aes(x = as.factor(Severity),
+                 y = log2(CD177+1),
+                 color = Severity))+
+  geom_boxplot()+
+  geom_jitter(width = 0.2)+
+  theme_bw()+
+  labs(x = "", y = "CD177")+
+  scale_color_manual(values = c("#de77ae", "#c51b7d", '#8e0152'))+
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(), 
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        plot.background = element_blank(),
+        panel.border = element_blank(), 
+        axis.line = element_line(color = 'black'), 
+        legend.position = "none")
+
+OLFM4 <- ggplot(exp_treatment, aes(x = as.factor(Severity),
+                                   y = log2(OLFM4+1),
+                                   color = Severity))+
+  geom_boxplot()+
+  geom_jitter(width = 0.2)+
+  theme_bw()+
+  labs(x = "", y = "OLFM4")+
+  scale_color_manual(values = c("#de77ae", "#c51b7d", '#8e0152'))+
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(), 
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        plot.background = element_blank(),
+        panel.border = element_blank(), 
+        axis.line = element_line(color = 'black'), 
+        legend.position = "none")
+
+ABCA13 <- ggplot(exp_treatment, aes(x = as.factor(Severity),
+                                   y = log2(ABCA13+1),
+                                   color = Severity))+
+  geom_boxplot()+
+  geom_jitter(width = 0.2)+
+  theme_bw()+
+  labs(x = "", y = "ABCA13")+
+  scale_color_manual(values = c("#de77ae", "#c51b7d", '#8e0152'))+
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(), 
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        plot.background = element_blank(),
+        panel.border = element_blank(), 
+        axis.line = element_line(color = 'black'), 
+        legend.position = "none")
+
+
+MMP8 <- ggplot(exp_treatment, aes(x = as.factor(Severity),
+                                    y = log2(MMP8+1),
+                                    color = Severity))+
+  geom_boxplot()+
+  geom_jitter(width = 0.2)+
+  theme_bw()+
+  labs(x = "", y = "MMP8")+
+  scale_color_manual(values = c("#de77ae", "#c51b7d", '#8e0152'))+
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(), 
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        plot.background = element_blank(),
+        panel.border = element_blank(), 
+        axis.line = element_line(color = 'black'), 
+        legend.position = "none")
+
+
+METTL7B <- ggplot(exp_treatment, aes(x = as.factor(Severity),
+                                  y = log2(METTL7B+1),
+                                  color = Severity))+
+  geom_boxplot()+
+  geom_jitter(width = 0.2)+
+  theme_bw()+
+  labs(x = "", y = "METTL7B")+
+  scale_color_manual(values = c("#de77ae", "#c51b7d", '#8e0152'))+
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(), 
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        plot.background = element_blank(),
+        panel.border = element_blank(), 
+        axis.line = element_line(color = 'black'), 
+        legend.position = "none")
+
+
+PCOLCE2 <- ggplot(exp_treatment, aes(x = as.factor(Severity),
+                                     y = log2(PCOLCE2+1),
+                                     color = Severity))+
+  geom_boxplot()+
+  geom_jitter(width = 0.2)+
+  theme_bw()+
+  labs(x = "", y = "PCOLCE2")+
+  scale_color_manual(values = c("#de77ae", "#c51b7d", '#8e0152'))+
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(), 
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        plot.background = element_blank(),
+        panel.border = element_blank(), 
+        axis.line = element_line(color = 'black'), 
+        legend.position = "none")
+
+
+COL17A1 <- ggplot(exp_treatment, aes(x = as.factor(Severity),
+                                     y = log2(COL17A1+1),
+                                     color = Severity))+
+  geom_boxplot()+
+  geom_jitter(width = 0.2)+
+  theme_bw()+
+  labs(x = "", y = "COL17A1")+
+  scale_color_manual(values = c("#de77ae", "#c51b7d", '#8e0152'))+
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(), 
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        plot.background = element_blank(),
+        panel.border = element_blank(), 
+        axis.line = element_line(color = 'black'), 
+        legend.position = "none")
+
+
+SERPINB10 <- ggplot(exp_treatment, aes(x = as.factor(Severity),
+                                     y = log2(SERPINB10+1),
+                                     color = Severity))+
+  geom_boxplot()+
+  geom_jitter(width = 0.2)+
+  theme_bw()+
+  labs(x = "", y = "SERPINB10")+
+  scale_color_manual(values = c("#de77ae", "#c51b7d", '#8e0152'))+
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(), 
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        plot.background = element_blank(),
+        panel.border = element_blank(), 
+        axis.line = element_line(color = 'black'), 
+        legend.position = "none")
+
+
+CD177P1 <- ggplot(exp_treatment, aes(x = as.factor(Severity),
+                                       y = log2(CD177P1+1),
+                                       color = Severity))+
+  geom_boxplot()+
+  geom_jitter(width = 0.2)+
+  theme_bw()+
+  labs(x = "", y = "CD177P1")+
+  scale_color_manual(values = c("#de77ae", "#c51b7d", '#8e0152'))+
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(), 
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        plot.background = element_blank(),
+        panel.border = element_blank(), 
+        axis.line = element_line(color = 'black'), 
+        legend.position = "none")
+
+
+PCSK9 <- ggplot(exp_treatment, aes(x = as.factor(Severity),
+                                     y = log2(PCSK9+1),
+                                     color = Severity))+
+  geom_boxplot()+
+  geom_jitter(width = 0.2)+
+  theme_bw()+
+  labs(x = "", y = "PCSK9")+
+  scale_color_manual(values = c("#de77ae", "#c51b7d", '#8e0152'))+
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(), 
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        plot.background = element_blank(),
+        panel.border = element_blank(), 
+        axis.line = element_line(color = 'black'), 
+        legend.position = "none")
+
+grid.arrange(CD177, OLFM4, ABCA13, MMP8, METTL7B, PCOLCE2, COL17A1, SERPINB10, CD177P1, PCSK9, ncol = 2)
